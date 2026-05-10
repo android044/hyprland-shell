@@ -61,7 +61,7 @@ To install the shell, clone this repo anywhere and build with `cmake`:
 ```sh
 git clone https://github.com/<your-username>/hyprland-shell.git
 cd hyprland-shell
-cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/
+cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ -DVERSION=1.0.0
 cmake --build build
 sudo cmake --install build
 ```
@@ -78,7 +78,7 @@ This installs the shell config to `/etc/xdg/quickshell/hyprlandsh/` and librarie
 >
 > ```sh
 > mkdir -p ~/.config/quickshell/hyprlandsh
-> cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ -DINSTALL_QSCONFDIR=~/.config/quickshell/hyprlandsh
+> cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ -DVERSION=1.0.0 -DINSTALL_QSCONFDIR=~/.config/quickshell/hyprlandsh
 > cmake --build build
 > sudo cmake --install build
 > sudo chown -R $USER ~/.config/quickshell/hyprlandsh
