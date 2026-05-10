@@ -1,4 +1,4 @@
-import Caelestia.Config
+﻿import Hyprlandsh.Config
 import qs.services
 
 StyledText {

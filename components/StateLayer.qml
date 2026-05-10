@@ -1,6 +1,6 @@
-import QtQuick
+﻿import QtQuick
 import QtQuick.Shapes
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.services
 
 MouseArea {

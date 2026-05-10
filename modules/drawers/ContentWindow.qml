@@ -1,4 +1,4 @@
-pragma ComponentBehavior: Bound
+﻿pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls
@@ -6,8 +6,8 @@ import QtQuick.Effects
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
-import Caelestia.Blobs
-import Caelestia.Config
+import Hyprlandsh.Blobs
+import Hyprlandsh.Config
 import qs.components
 import qs.components.containers
 import qs.services

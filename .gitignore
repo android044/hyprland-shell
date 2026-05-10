@@ -4,3 +4,6 @@
 build/
 .cache/
 logs
+
+.claude
+CLAUDE.md

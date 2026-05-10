@@ -1,10 +1,10 @@
-pragma ComponentBehavior: Bound
+﻿pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Bluetooth
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components
 import qs.components.controls
 import qs.services

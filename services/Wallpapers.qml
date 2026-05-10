@@ -1,10 +1,10 @@
-pragma Singleton
+﻿pragma Singleton
 
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Caelestia.Config
-import Caelestia.Models
+import Hyprlandsh.Config
+import Hyprlandsh.Models
 import qs.services
 import qs.utils
 
@@ -22,7 +22,7 @@ Searcher {
 
     function setWallpaper(path: string): void {
         actualCurrent = path;
-        Quickshell.execDetached(["caelestia", "wallpaper", "-f", path, ...smartArg]);
+        Quickshell.execDetached(["hyprlandsh", "wallpaper", "-f", path, ...smartArg]);
     }
 
     function preview(path: string): void {
@@ -83,7 +83,7 @@ Searcher {
     Process {
         id: getPreviewColoursProc
 
-        command: ["caelestia", "wallpaper", "-p", root.previewPath, ...root.smartArg]
+        command: ["hyprlandsh", "wallpaper", "-p", root.previewPath, ...root.smartArg]
         stdout: StdioCollector {
             onStreamFinished: {
                 Colours.load(text, true);

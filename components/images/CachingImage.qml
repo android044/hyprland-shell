@@ -1,6 +1,6 @@
-import QtQuick
+﻿import QtQuick
 import Quickshell
-import Caelestia.Images
+import Hyprlandsh.Images
 
 Image {
     id: root

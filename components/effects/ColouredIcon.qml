@@ -1,8 +1,8 @@
-pragma ComponentBehavior: Bound
+﻿pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell.Widgets
-import Caelestia
+import Hyprlandsh
 
 IconImage {
     id: root

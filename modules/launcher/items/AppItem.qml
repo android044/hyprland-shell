@@ -1,7 +1,7 @@
-import QtQuick
+﻿import QtQuick
 import Quickshell
 import Quickshell.Widgets
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components
 import qs.services
 import qs.utils

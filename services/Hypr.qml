@@ -1,12 +1,12 @@
-pragma Singleton
+﻿pragma Singleton
 
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Io
-import Caelestia
-import Caelestia.Config
-import Caelestia.Internal
+import Hyprlandsh
+import Hyprlandsh.Config
+import Hyprlandsh.Internal
 import qs.components.misc
 
 Singleton {
@@ -87,7 +87,7 @@ Singleton {
     }
 
     function reloadDynamicConfs(): void {
-        extras.batchMessage(["keyword bindlni ,Caps_Lock,global,caelestia:refreshDevices", "keyword bindlni ,Num_Lock,global,caelestia:refreshDevices"]);
+        extras.batchMessage(["keyword bindlni ,Caps_Lock,global,hyprlandsh:refreshDevices", "keyword bindlni ,Num_Lock,global,hyprlandsh:refreshDevices"]);
     }
 
     Component.onCompleted: reloadDynamicConfs()
@@ -161,7 +161,7 @@ Singleton {
     FileView {
         id: kbLayoutFile
 
-        path: Quickshell.env("CAELESTIA_XKB_RULES_PATH") || "/usr/share/X11/xkb/rules/base.lst"
+        path: Quickshell.env("HYPRLANDSH_XKB_RULES_PATH") || "/usr/share/X11/xkb/rules/base.lst"
         onLoaded: {
             const layoutMatch = text().match(/! layout\n([\s\S]*?)\n\n/);
             if (layoutMatch) {

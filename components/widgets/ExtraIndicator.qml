@@ -1,6 +1,6 @@
-import "../effects"
+﻿import "../effects"
 import QtQuick
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components
 import qs.services
 

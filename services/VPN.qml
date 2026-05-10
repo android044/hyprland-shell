@@ -1,10 +1,10 @@
-pragma Singleton
+﻿pragma Singleton
 
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Caelestia
-import Caelestia.Config
+import Hyprlandsh
+import Hyprlandsh.Config
 
 Singleton {
     id: root
@@ -480,7 +480,7 @@ Singleton {
     LoggingCategory {
         id: lc
 
-        name: "caelestia.qml.services.vpn"
+        name: "hyprlandsh.qml.services.vpn"
         defaultLogLevel: LoggingCategory.Info
     }
 }

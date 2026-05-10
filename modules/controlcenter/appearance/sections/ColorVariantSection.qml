@@ -1,11 +1,11 @@
-pragma ComponentBehavior: Bound
+﻿pragma ComponentBehavior: Bound
 
 import ".."
 import "../../../launcher/services"
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components
 import qs.components.containers
 import qs.components.controls
@@ -39,7 +39,7 @@ CollapsibleSection {
                         const variant = modelData.variant;
 
                         Schemes.currentVariant = variant;
-                        Quickshell.execDetached(["caelestia", "scheme", "set", "-v", variant]);
+                        Quickshell.execDetached(["hyprlandsh", "scheme", "set", "-v", variant]);
 
                         Qt.callLater(() => {
                             reloadTimer.restart();

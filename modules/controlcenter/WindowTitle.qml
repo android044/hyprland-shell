@@ -1,6 +1,6 @@
-import QtQuick
+﻿import QtQuick
 import Quickshell
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components
 import qs.services
 
@@ -19,7 +19,7 @@ StyledRect {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
 
-        text: qsTr("Caelestia Settings - %1").arg(root.session.active)
+        text: qsTr("Hyprlandsh Settings - %1").arg(root.session.active)
         font.capitalization: Font.Capitalize
         font.pointSize: Tokens.font.size.larger
         font.weight: 500

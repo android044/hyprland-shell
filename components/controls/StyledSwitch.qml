@@ -1,7 +1,7 @@
-import QtQuick
+﻿import QtQuick
 import QtQuick.Shapes
 import QtQuick.Templates
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components
 import qs.services
 

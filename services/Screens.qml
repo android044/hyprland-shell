@@ -1,7 +1,7 @@
-pragma Singleton
+﻿pragma Singleton
 
 import Quickshell
-import Caelestia.Config
+import Hyprlandsh.Config
 
 Singleton {
     id: root

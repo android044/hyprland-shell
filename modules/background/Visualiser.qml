@@ -1,11 +1,11 @@
-pragma ComponentBehavior: Bound
+﻿pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Effects
 import Quickshell
-import Caelestia.Config
-import Caelestia.Internal
-import Caelestia.Services
+import Hyprlandsh.Config
+import Hyprlandsh.Internal
+import Hyprlandsh.Services
 import qs.components
 import qs.services
 

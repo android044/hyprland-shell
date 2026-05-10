@@ -1,10 +1,10 @@
-pragma ComponentBehavior: Bound
+﻿pragma ComponentBehavior: Bound
 
 import "lock"
 import Quickshell
 import Quickshell.Wayland
-import Caelestia.Config
-import Caelestia.Internal
+import Hyprlandsh.Config
+import Hyprlandsh.Internal
 import qs.services
 
 Scope {

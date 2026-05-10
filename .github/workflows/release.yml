@@ -21,19 +21,16 @@ jobs:
           rsync -av \
             --exclude='release' \
             --exclude='.*' \
-            --exclude='nix' \
-            --exclude='flake.lock' \
-            --exclude='flake.nix' \
             . release
-          tar -czf caelestia-shell-${{ github.ref_name }}.tar.gz release
-          cp caelestia-shell-${{ github.ref_name }}.tar.gz caelestia-shell-latest.tar.gz
+          tar -czf hyprland-shell-${{ github.ref_name }}.tar.gz release
+          cp hyprland-shell-${{ github.ref_name }}.tar.gz hyprland-shell-latest.tar.gz
 
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            caelestia-shell-${{ github.ref_name }}.tar.gz
-            caelestia-shell-latest.tar.gz
+            hyprland-shell-${{ github.ref_name }}.tar.gz
+            hyprland-shell-latest.tar.gz
           generate_release_notes: true
       
       - name: Update stable branch

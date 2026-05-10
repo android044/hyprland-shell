@@ -1,5 +1,5 @@
-import QtQuick
-import Caelestia.Config
+﻿import QtQuick
+import Hyprlandsh.Config
 import qs.components
 import qs.services
 

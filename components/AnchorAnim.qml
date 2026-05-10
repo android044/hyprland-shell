@@ -1,5 +1,5 @@
-import QtQuick
-import Caelestia.Config
+﻿import QtQuick
+import Hyprlandsh.Config
 
 AnchorAnimation {
     enum Type {

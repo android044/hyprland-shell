@@ -1,9 +1,9 @@
-pragma Singleton
+﻿pragma Singleton
 
 import ".."
 import QtQuick
 import Quickshell
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.utils
 
 Searcher {
@@ -79,7 +79,7 @@ Searcher {
 
         function onClicked(list: AppList): void {
             list.visibilities.launcher = false;
-            Quickshell.execDetached(["caelestia", "scheme", "set", "-v", variant]);
+            Quickshell.execDetached(["hyprlandsh", "scheme", "set", "-v", variant]);
         }
     }
 }

@@ -1,10 +1,10 @@
-pragma Singleton
+﻿pragma Singleton
 pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components.misc
 
 Singleton {

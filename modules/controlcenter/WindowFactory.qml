@@ -1,4 +1,4 @@
-pragma Singleton
+﻿pragma Singleton
 
 import QtQuick
 import Quickshell
@@ -40,7 +40,7 @@ Singleton {
             maximumSize.width: implicitWidth
             maximumSize.height: implicitHeight
 
-            title: qsTr("Caelestia Settings - %1").arg(cc.active.slice(0, 1).toUpperCase() + cc.active.slice(1))
+            title: qsTr("Hyprlandsh Settings - %1").arg(cc.active.slice(0, 1).toUpperCase() + cc.active.slice(1))
 
             ControlCenter {
                 id: cc

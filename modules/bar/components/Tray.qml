@@ -1,9 +1,9 @@
-pragma ComponentBehavior: Bound
+﻿pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell
 import Quickshell.Services.SystemTray
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components
 import qs.services
 

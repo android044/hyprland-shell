@@ -1,12 +1,12 @@
-pragma Singleton
+﻿pragma Singleton
 pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
-import Caelestia
-import Caelestia.Config
+import Hyprlandsh
+import Hyprlandsh.Config
 import qs.components.misc
 import qs.services
 import qs.utils

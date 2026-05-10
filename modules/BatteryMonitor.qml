@@ -1,8 +1,8 @@
-import QtQuick
+﻿import QtQuick
 import Quickshell
 import Quickshell.Services.UPower
-import Caelestia
-import Caelestia.Config
+import Hyprlandsh
+import Hyprlandsh.Config
 
 Scope {
     id: root

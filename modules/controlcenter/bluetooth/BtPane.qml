@@ -1,4 +1,4 @@
-pragma ComponentBehavior: Bound
+﻿pragma ComponentBehavior: Bound
 
 import ".."
 import "../components"
@@ -6,7 +6,7 @@ import "."
 import QtQuick
 import Quickshell.Bluetooth
 import Quickshell.Widgets
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components
 import qs.components.containers
 import qs.components.controls

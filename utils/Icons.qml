@@ -1,9 +1,9 @@
-pragma Singleton
+﻿pragma Singleton
 
 import QtQuick
 import Quickshell
 import Quickshell.Services.Notifications
-import Caelestia.Config
+import Hyprlandsh.Config
 
 Singleton {
     id: root

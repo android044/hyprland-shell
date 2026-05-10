@@ -1,9 +1,9 @@
-import QtQuick
+﻿import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Services.Pam
-import Caelestia.Config
+import Hyprlandsh.Config
 
 Scope {
     id: root

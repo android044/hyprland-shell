@@ -1,9 +1,9 @@
-import QtQuick
+﻿import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell.Services.UPower
-import Caelestia.Config
-import Caelestia.Internal
+import Hyprlandsh.Config
+import Hyprlandsh.Internal
 import qs.components
 import qs.components.misc
 import qs.services

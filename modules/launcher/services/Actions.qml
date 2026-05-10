@@ -1,9 +1,9 @@
-pragma Singleton
+﻿pragma Singleton
 
 import ".."
 import QtQuick
 import Quickshell
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.services
 import qs.utils
 

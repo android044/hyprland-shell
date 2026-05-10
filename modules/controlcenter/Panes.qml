@@ -1,4 +1,4 @@
-pragma ComponentBehavior: Bound
+﻿pragma ComponentBehavior: Bound
 
 import "bluetooth"
 import "network"
@@ -11,7 +11,7 @@ import "dashboard"
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components
 import qs.services
 import qs.modules.controlcenter

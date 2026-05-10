@@ -1,11 +1,11 @@
-pragma Singleton
+﻿pragma Singleton
 
 import "../utils/scripts/lrcparser.js" as Lrc
 import QtQuick
 import Quickshell
 import Quickshell.Io
-import Caelestia
-import Caelestia.Config
+import Hyprlandsh
+import Hyprlandsh.Config
 import qs.utils
 
 Singleton {

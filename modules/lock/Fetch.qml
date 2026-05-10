@@ -1,9 +1,9 @@
-pragma ComponentBehavior: Bound
+﻿pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.UPower
-import Caelestia.Config
+import Hyprlandsh.Config
 import qs.components
 import qs.components.effects
 import qs.services
@@ -42,7 +42,7 @@ ColumnLayout {
 
         MonoText {
             Layout.fillWidth: true
-            text: "caelestiafetch.sh"
+            text: "hyprlandshfetch.sh"
             font.pointSize: root.width > 400 ? Tokens.font.size.larger : Tokens.font.size.normal
             elide: Text.ElideRight
         }
@@ -51,7 +51,7 @@ ColumnLayout {
             Layout.fillHeight: true
             active: !iconLoader.active
 
-            sourceComponent: SysInfo.isDefaultLogo ? caelestiaLogo : distroIcon
+            sourceComponent: SysInfo.isDefaultLogo ? hyprlandshLogo : distroIcon
         }
     }
 
@@ -66,7 +66,7 @@ ColumnLayout {
             Layout.fillHeight: true
             active: root.width > 320
 
-            sourceComponent: SysInfo.isDefaultLogo ? caelestiaLogo : distroIcon
+            sourceComponent: SysInfo.isDefaultLogo ? hyprlandshLogo : distroIcon
         }
 
         ColumnLayout {
@@ -143,7 +143,7 @@ ColumnLayout {
     }
 
     Component {
-        id: caelestiaLogo
+        id: hyprlandshLogo
 
         Logo {
             width: height

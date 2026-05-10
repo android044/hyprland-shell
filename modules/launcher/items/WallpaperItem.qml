@@ -1,7 +1,7 @@
-import QtQuick
+﻿import QtQuick
 import Quickshell
-import Caelestia.Config
-import Caelestia.Models
+import Hyprlandsh.Config
+import Hyprlandsh.Models
 import qs.components
 import qs.components.effects
 import qs.components.images
