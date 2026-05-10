@@ -43,6 +43,19 @@ Build dependencies:
 -   [`cmake`](https://cmake.org)
 -   [`ninja`](https://github.com/ninja-build/ninja)
 
+**Arch Linux install commands:**
+
+```sh
+# Official repos
+sudo pacman -S ddcutil brightnessctl networkmanager lm_sensors fish aubio \
+               pipewire qt6-base qt6-declarative swappy libqalculate bash \
+               cmake ninja gcc-libs
+
+# AUR (requires yay or paru)
+yay -S quickshell-git app2unit libcava caelestia-cli \
+       ttf-material-symbols-variable-git ttf-caskaydia-cove-nerd
+```
+
 To install the shell, clone this repo anywhere and build with `cmake`:
 
 ```sh
