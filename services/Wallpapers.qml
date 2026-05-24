@@ -11,7 +11,9 @@ import qs.utils
 Searcher {
     id: root
 
-    readonly property string currentNamePath: `${Paths.state}/wallpaper/path.txt`
+    // caelestia-cli writes path.txt to its own state dir (~/.local/state/caelestia/),
+    // not the hyprlandsh state dir (~/.local/state/hyprlandsh/)
+    readonly property string currentNamePath: `${Quickshell.env("XDG_STATE_HOME") || `${Paths.home}/.local/state`}/caelestia/wallpaper/path.txt`
     readonly property list<string> smartArg: GlobalConfig.services.smartScheme ? [] : ["--no-smart"]
 
     property bool showPreview: false
@@ -22,7 +24,7 @@ Searcher {
 
     function setWallpaper(path: string): void {
         actualCurrent = path;
-        Quickshell.execDetached(["hyprlandsh", "wallpaper", "-f", path, ...smartArg]);
+        Quickshell.execDetached(["caelestia", "wallpaper", "-f", path, ...smartArg]);
     }
 
     function preview(path: string): void {
@@ -83,7 +85,7 @@ Searcher {
     Process {
         id: getPreviewColoursProc
 
-        command: ["hyprlandsh", "wallpaper", "-p", root.previewPath, ...root.smartArg]
+        command: ["caelestia", "wallpaper", "-p", root.previewPath, ...root.smartArg]
         stdout: StdioCollector {
             onStreamFinished: {
                 Colours.load(text, true);
