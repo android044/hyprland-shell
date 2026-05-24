@@ -76,7 +76,7 @@ Singleton {
     }
 
     function setMode(mode: string): void {
-        Quickshell.execDetached(["hyprlandsh", "scheme", "set", "--notify", "-m", mode]);
+        Quickshell.execDetached(["caelestia", "scheme", "set", "--notify", "-m", mode]);
     }
 
     function reloadHyprRules(): void {
@@ -95,7 +95,9 @@ Singleton {
     }
 
     FileView {
-        path: `${Paths.state}/scheme.json`
+        // caelestia-cli writes scheme.json to its own state dir (~/.local/state/caelestia/),
+        // not the hyprlandsh state dir (~/.local/state/hyprlandsh/)
+        path: `${Quickshell.env("XDG_STATE_HOME") || `${Paths.home}/.local/state`}/caelestia/scheme.json`
         watchChanges: true
         onFileChanged: reload()
         onLoaded: root.load(text(), false)
