@@ -137,11 +137,17 @@ Item {
             }
         }
 
-        transitions: Transition {
-            Anim {
-                target: img
-                properties: "opacity,scale"
-            }
-        }
+        // DISABLED: Wallpaper crossfade animation causes a segfault (SIGSEGV) in
+        // QQuickPropertyChanges::actions() on Qt 6.11.0. The crash occurs due to a
+        // race condition where one of the two Img components gets destroyed while
+        // the state transition animation is still referencing it.
+        // See: ~/.cache/quickshell/crashes/wrurxift/report.txt
+        // TODO: Re-enable when Qt fixes the regression in a future release.
+        // transitions: Transition {
+        //     Anim {
+        //         target: img
+        //         properties: "opacity,scale"
+        //     }
+        // }
     }
 }
