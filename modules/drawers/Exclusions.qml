@@ -14,7 +14,6 @@ Scope {
 
     ExclusionZone {
         anchors.left: true
-        exclusiveZone: root.bar.exclusiveZone
     }
 
     ExclusionZone {
@@ -27,6 +26,7 @@ Scope {
 
     ExclusionZone {
         anchors.bottom: true
+        exclusiveZone: root.bar.exclusiveZone
     }
 
     component ExclusionZone: StyledWindow {

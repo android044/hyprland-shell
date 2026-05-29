@@ -20,16 +20,16 @@ StyledRect {
     radius: Tokens.rounding.full
 
     clip: true
-    implicitWidth: Tokens.sizes.bar.innerWidth
-    implicitHeight: iconColumn.implicitHeight + Tokens.padding.normal * 2 - (Config.bar.status.showLockStatus && !Hypr.capsLock && !Hypr.numLock ? iconColumn.spacing : 0)
+    implicitWidth: iconColumn.implicitWidth + Tokens.padding.normal * 2 - (Config.bar.status.showLockStatus && !Hypr.capsLock && !Hypr.numLock ? iconColumn.spacing : 0)
+    implicitHeight: Tokens.sizes.bar.innerWidth
 
-    ColumnLayout {
+    RowLayout {
         id: iconColumn
 
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: Tokens.padding.normal
+        anchors.left: parent.left
+        anchors.leftMargin: Tokens.padding.normal
 
         spacing: Tokens.spacing.smaller / 2
 
@@ -38,12 +38,12 @@ StyledRect {
             name: "lockstatus"
             active: Config.bar.status.showLockStatus
 
-            sourceComponent: ColumnLayout {
+            sourceComponent: RowLayout {
                 spacing: 0
 
                 Item {
-                    implicitWidth: capslockIcon.implicitWidth
-                    implicitHeight: Hypr.capsLock ? capslockIcon.implicitHeight : 0
+                    implicitWidth: Hypr.capsLock ? capslockIcon.implicitWidth : 0
+                    implicitHeight: capslockIcon.implicitHeight
 
                     MaterialIcon {
                         id: capslockIcon
@@ -65,16 +65,16 @@ StyledRect {
                         }
                     }
 
-                    Behavior on implicitHeight {
+                    Behavior on implicitWidth {
                         Anim {}
                     }
                 }
 
                 Item {
-                    Layout.topMargin: Hypr.capsLock && Hypr.numLock ? iconColumn.spacing : 0
+                    Layout.leftMargin: Hypr.capsLock && Hypr.numLock ? iconColumn.spacing : 0
 
-                    implicitWidth: numlockIcon.implicitWidth
-                    implicitHeight: Hypr.numLock ? numlockIcon.implicitHeight : 0
+                    implicitWidth: Hypr.numLock ? numlockIcon.implicitWidth : 0
+                    implicitHeight: numlockIcon.implicitHeight
 
                     MaterialIcon {
                         id: numlockIcon
@@ -96,7 +96,7 @@ StyledRect {
                         }
                     }
 
-                    Behavior on implicitHeight {
+                    Behavior on implicitWidth {
                         Anim {}
                     }
                 }
@@ -166,12 +166,12 @@ StyledRect {
 
         // Bluetooth section
         WrappedLoader {
-            Layout.preferredHeight: implicitHeight
+            Layout.preferredWidth: implicitWidth
 
             name: "bluetooth"
             active: Config.bar.status.showBluetooth
 
-            sourceComponent: ColumnLayout {
+            sourceComponent: RowLayout {
                 spacing: Tokens.spacing.smaller / 2
 
                 // Bluetooth icon
@@ -225,7 +225,7 @@ StyledRect {
                 }
             }
 
-            Behavior on Layout.preferredHeight {
+            Behavior on Layout.preferredWidth {
                 Anim {}
             }
         }
@@ -265,7 +265,7 @@ StyledRect {
         required property string name
 
         asynchronous: true
-        Layout.alignment: Qt.AlignHCenter
+        Layout.alignment: Qt.AlignVCenter
         visible: active
     }
 }
