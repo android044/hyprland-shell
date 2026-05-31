@@ -4,7 +4,6 @@ import QtQuick
 import Hyprlandsh.Config
 import qs.components
 import qs.services
-import qs.utils
 
 Item {
     id: root
@@ -35,8 +34,8 @@ Item {
     property Title current: text1
 
     clip: true
-    implicitWidth: icon.implicitWidth + current.implicitWidth + current.anchors.leftMargin
-    implicitHeight: Math.max(icon.implicitHeight, current.implicitHeight)
+    implicitWidth: current.implicitWidth
+    implicitHeight: current.implicitHeight
 
     Loader {
         asynchronous: true
@@ -64,16 +63,6 @@ Item {
         }
     }
 
-    MaterialIcon {
-        id: icon
-
-        anchors.verticalCenter: parent.verticalCenter
-
-        animate: true
-        text: Icons.getAppCategoryIcon(Hypr.activeToplevel?.lastIpcObject.class, "desktop_windows")
-        color: root.colour
-    }
-
     Title {
         id: text1
     }
@@ -89,7 +78,7 @@ Item {
         font.pointSize: root.Tokens.font.size.smaller
         font.family: root.Tokens.font.family.mono
         elide: Qt.ElideRight
-        elideWidth: root.maxWidth - icon.width
+        elideWidth: root.maxWidth
 
         onTextChanged: {
             const next = root.current === text1 ? text2 : text1;
@@ -108,9 +97,8 @@ Item {
     component Title: StyledText {
         id: text
 
-        anchors.verticalCenter: icon.verticalCenter
-        anchors.left: icon.right
-        anchors.leftMargin: Tokens.spacing.small
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
 
         font.pointSize: metrics.font.pointSize
         font.family: metrics.font.family
