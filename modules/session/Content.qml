@@ -4,6 +4,7 @@ import QtQuick
 import Quickshell
 import Hyprlandsh.Config
 import qs.components
+import qs.components.effects
 import qs.services
 import qs.utils
 
@@ -45,16 +46,10 @@ Column {
         KeyNavigation.down: hibernate
     }
 
-    AnimatedImage {
-        width: Tokens.sizes.session.button
-        height: Tokens.sizes.session.button
-        sourceSize.width: width * ((QsWindow.window as QsWindow)?.devicePixelRatio ?? 1)
-
-        playing: visible
-        asynchronous: true
-        speed: Config.general.sessionGifSpeed
-        source: Paths.absolutePath(Config.paths.sessionGif)
-        fillMode: AnimatedImage.PreserveAspectFit
+    ColouredIcon {
+        source: SysInfo.osLogo
+        implicitSize: Tokens.sizes.session.button
+        colour: Colours.palette.m3tertiary
     }
 
     SessionButton {
