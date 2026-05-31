@@ -7,7 +7,6 @@ import Quickshell
 import Hyprlandsh.Config
 import qs.components
 import qs.services
-import qs.utils
 
 StyledClippingRect {
     id: root
@@ -76,15 +75,8 @@ StyledClippingRect {
                     activeWsId: root.activeWsId
                     occupied: root.occupied
                     groupOffset: root.groupOffset
+                    hasActiveWindow: Hypr.activeToplevel !== null
                 }
-            }
-
-            MaterialIcon {
-                Layout.alignment: Qt.AlignVCenter
-                animate: true
-                text: Icons.getAppCategoryIcon(Hypr.activeToplevel?.lastIpcObject.class, "desktop_windows")
-                color: Colours.palette.m3onSurface
-                visible: Hypr.activeToplevel !== null
             }
         }
 
@@ -99,7 +91,6 @@ StyledClippingRect {
                 mask: layout
                 fullscreen: root.fullscreen
                 hasActiveWindow: Hypr.activeToplevel !== null
-                containerWidth: root.width
             }
         }
 

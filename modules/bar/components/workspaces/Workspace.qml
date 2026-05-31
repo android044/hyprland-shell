@@ -15,10 +15,14 @@ RowLayout {
     required property int activeWsId
     required property var occupied
     required property int groupOffset
+    required property bool hasActiveWindow
 
     readonly property bool isWorkspace: true // Flag for finding workspace children
+    readonly property bool isActive: activeWsId === ws
+    // Reserve space for the icon inside ActiveIndicator when this is the active workspace
+    readonly property real iconReserve: isActive && hasActiveWindow ? (Tokens.sizes.bar.innerWidth - Tokens.padding.small * 2 + Math.floor(Tokens.spacing.small / 2)) : 0
     // Unanimated prop for others to use as reference
-    readonly property int size: implicitWidth + (hasWindows ? Tokens.padding.small : 0)
+    readonly property int size: implicitWidth + (hasWindows ? Tokens.padding.small : 0) + iconReserve
 
     readonly property int ws: groupOffset + index + 1
     readonly property bool isOccupied: occupied[ws] ?? false

@@ -5,6 +5,7 @@ import Hyprlandsh.Config
 import qs.components
 import qs.components.effects
 import qs.services
+import qs.utils
 
 StyledRect {
     id: root
@@ -14,7 +15,6 @@ StyledRect {
     required property Item mask
     required property bool fullscreen
     required property bool hasActiveWindow
-    required property real containerWidth
 
     readonly property int currentWsIdx: {
         let i = activeWsId - 1;
@@ -27,11 +27,10 @@ StyledRect {
     property real trailing: workspaces.count > 0 ? workspaces.itemAt(currentWsIdx)?.x ?? 0 : 0
     property real currentSize: workspaces.count > 0 ? Tokens.sizes.bar.innerWidth - Tokens.padding.small * 2 : 0
     property real wsOffset: Math.min(leading, trailing)
-    property real offset: hasActiveWindow ? -mask.x : wsOffset
+    property real offset: wsOffset
+    readonly property real iconExtra: hasActiveWindow ? (appIcon.implicitWidth + Math.floor(Tokens.spacing.small / 2)) : 0
     property real size: {
-        if (root.hasActiveWindow)
-            return containerWidth;
-        const s = Math.abs(leading - trailing) + currentSize;
+        const s = Math.abs(leading - trailing) + currentSize + root.iconExtra;
         if (Config.bar.workspaces.activeTrail && lastWs > currentWsIdx) {
             const ws = workspaces.itemAt(lastWs) as Workspace;
             return ws ? Math.min(ws.x + ws.size - wsOffset, s) : 0;
@@ -54,17 +53,36 @@ StyledRect {
     radius: Tokens.rounding.full
     color: Colours.palette.m3primary
 
-    Colouriser {
-        source: root.mask
-        sourceColor: Colours.palette.m3onSurface
-        colorizationColor: Colours.palette.m3onPrimary
+    Item {
+        clip: true
+        width: root.currentSize
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
 
-        x: -parent.offset
-        y: 0
-        implicitWidth: root.mask.implicitWidth
-        implicitHeight: root.mask.implicitHeight
+        Colouriser {
+            source: root.mask
+            sourceColor: Colours.palette.m3onSurface
+            colorizationColor: Colours.palette.m3onPrimary
 
+            x: -root.offset
+            y: 0
+            implicitWidth: root.mask.implicitWidth
+            implicitHeight: root.mask.implicitHeight
+
+            anchors.verticalCenter: parent.verticalCenter
+        }
+    }
+
+    MaterialIcon {
+        id: appIcon
+
+        x: root.currentSize + Math.floor(Tokens.spacing.small / 2)
         anchors.verticalCenter: parent.verticalCenter
+
+        animate: true
+        visible: root.hasActiveWindow
+        text: Icons.getAppCategoryIcon(Hypr.activeToplevel?.lastIpcObject.class, "desktop_windows")
+        color: Colours.palette.m3onPrimary
     }
 
     Behavior on leading {
