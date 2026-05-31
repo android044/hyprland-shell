@@ -47,13 +47,6 @@ Item {
         }
     }
 
-    Behavior on y {
-        Anim {
-            duration: content.animLength
-            easing: content.animCurve
-        }
-    }
-
     Wrapper {
         id: content
 
