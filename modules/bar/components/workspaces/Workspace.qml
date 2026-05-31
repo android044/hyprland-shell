@@ -15,12 +15,18 @@ RowLayout {
     required property int activeWsId
     required property var occupied
     required property int groupOffset
-    required property bool hasActiveWindow
+    required property real iconExtra
+    required property bool indicatorSliding
+    required property real indicatorOffset
+    required property real indicatorSize
+
+    readonly property bool indicatorCovers: indicatorOffset < x + width
+                                         && indicatorOffset + indicatorSize > x
 
     readonly property bool isWorkspace: true // Flag for finding workspace children
     readonly property bool isActive: activeWsId === ws
-    // Reserve space for the icon inside ActiveIndicator when this is the active workspace
-    readonly property real iconReserve: isActive && hasActiveWindow ? (Tokens.sizes.bar.innerWidth - Tokens.padding.small * 2 + Math.floor(Tokens.spacing.small / 2)) : 0
+    // Reserve the exact space the indicator's appIcon occupies (received from ActiveIndicator)
+    readonly property real iconReserve: isActive ? iconExtra : 0
     // Unanimated prop for others to use as reference
     readonly property int size: implicitWidth + (hasWindows ? Tokens.padding.small : 0) + iconReserve
 
@@ -69,53 +75,25 @@ RowLayout {
         Layout.leftMargin: -Tokens.sizes.bar.innerWidth / 10
 
         visible: active
-        active: root.hasWindows
+        active: root.hasWindows && !root.isActive
+        // Hide (don't unload) while the sliding indicator passes over, so the icon
+        // doesn't poke out from under the pill. Opacity keeps the layout slot stable;
+        // toggling `active` here would change implicitWidth and create a polish loop,
+        // since the indicator's offset/size are derived from this RowLayout's geometry.
+        opacity: root.indicatorSliding && root.indicatorCovers ? 0 : 1
 
-        sourceComponent: Row {
-            spacing: 0
+        sourceComponent: MaterialIcon {
+            grade: 0
+            animate: true
 
-            add: Transition {
-                Anim {
-                    properties: "scale"
-                    from: 0
-                    to: 1
-                    easing: Tokens.anim.standardDecel
-                }
+            text: {
+                const wins = Hypr.toplevels.values.filter(c => c.workspace?.id === root.ws);
+                const lastAddr = Hypr.workspaces.values.find(w => w.id === root.ws)?.lastIpcObject.lastwindow;
+                const focused = wins.find(c => c.lastIpcObject.address === lastAddr) ?? wins[0];
+                return Icons.getAppCategoryIcon(focused?.lastIpcObject.class ?? "", "terminal");
             }
-
-            move: Transition {
-                Anim {
-                    properties: "scale"
-                    to: 1
-                    easing: Tokens.anim.standardDecel
-                }
-                Anim {
-                    properties: "x,y"
-                }
-            }
-
-            Repeater {
-                model: ScriptModel {
-                    values: {
-                        const ws = root.ws;
-                        const windows = Hypr.toplevels.values.filter(c => c.workspace?.id === ws);
-                        const maxIcons = root.Config.bar.workspaces.maxWindowIcons;
-                        return maxIcons > 0 ? windows.slice(0, maxIcons) : windows;
-                    }
-                }
-
-                MaterialIcon {
-                    required property var modelData
-
-                    grade: 0
-                    text: Icons.getAppCategoryIcon(modelData.lastIpcObject.class, "terminal")
-                    color: Colours.palette.m3onSurfaceVariant
-                }
-            }
+            color: Colours.palette.m3onSurfaceVariant
         }
     }
 
-    Behavior on Layout.preferredWidth {
-        Anim {}
-    }
 }

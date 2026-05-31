@@ -28,7 +28,11 @@ StyledRect {
     property real currentSize: workspaces.count > 0 ? Tokens.sizes.bar.innerWidth - Tokens.padding.small * 2 : 0
     property real wsOffset: Math.min(leading, trailing)
     property real offset: wsOffset
-    readonly property real iconExtra: hasActiveWindow ? (appIcon.implicitWidth + Math.floor(Tokens.spacing.small / 2)) : 0
+    // Reserve icon space whenever the active workspace has a window. Must NOT depend on
+    // `sliding`: this width feeds the active Workspace's iconReserve and the container's
+    // implicitWidth, so gating it on a navigation-transient flag collapses the pill to a
+    // circle and shrinks the whole container on every workspace switch.
+    readonly property real iconExtra: hasActiveWindow ? (appIcon.implicitWidth + Math.floor(Tokens.sizes.bar.innerWidth / 10)) : 0
     property real size: {
         const s = Math.abs(leading - trailing) + currentSize + root.iconExtra;
         if (Config.bar.workspaces.activeTrail && lastWs > currentWsIdx) {
@@ -40,10 +44,20 @@ StyledRect {
 
     property int cWs
     property int lastWs
+    property bool sliding: false
 
     onCurrentWsIdxChanged: {
         lastWs = cWs;
         cWs = currentWsIdx;
+        sliding = true;
+        slideEndTimer.restart();
+    }
+
+    Timer {
+        id: slideEndTimer
+        // trailing Behavior uses small * 2; wait at least that long before showing the icon
+        interval: Tokens.anim.durations.small * 2
+        onTriggered: root.sliding = false
     }
 
     clip: true
@@ -76,8 +90,9 @@ StyledRect {
     MaterialIcon {
         id: appIcon
 
-        x: root.currentSize + Math.floor(Tokens.spacing.small / 2)
+        x: root.currentSize - Math.floor(Tokens.sizes.bar.innerWidth / 10)
         anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: 1
 
         animate: true
         visible: root.hasActiveWindow
@@ -95,7 +110,7 @@ StyledRect {
         enabled: root.Config.bar.workspaces.activeTrail
 
         EAnim {
-            duration: Tokens.anim.durations.normal * 2
+            duration: Tokens.anim.durations.small * 2
         }
     }
 
@@ -124,6 +139,6 @@ StyledRect {
     }
 
     component EAnim: Anim {
-        type: Anim.Emphasized
+        type: Anim.EmphasizedSmall
     }
 }

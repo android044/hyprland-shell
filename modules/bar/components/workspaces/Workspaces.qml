@@ -75,12 +75,17 @@ StyledClippingRect {
                     activeWsId: root.activeWsId
                     occupied: root.occupied
                     groupOffset: root.groupOffset
-                    hasActiveWindow: Hypr.activeToplevel !== null
+                    iconExtra: indicatorLoader.item?.iconExtra ?? 0
+                    indicatorSliding: indicatorLoader.item?.sliding ?? false
+                    indicatorOffset: indicatorLoader.item?.offset ?? 0
+                    indicatorSize: indicatorLoader.item?.size ?? 0
                 }
             }
         }
 
         Loader {
+            id: indicatorLoader
+
             asynchronous: true
             anchors.verticalCenter: parent.verticalCenter
             active: Config.bar.workspaces.activeIndicator
@@ -90,7 +95,8 @@ StyledClippingRect {
                 workspaces: workspaces
                 mask: layout
                 fullscreen: root.fullscreen
-                hasActiveWindow: Hypr.activeToplevel !== null
+                // One icon when the active workspace has window(s); none when it's empty
+                hasActiveWindow: root.occupied[root.activeWsId] ?? false
             }
         }
 
