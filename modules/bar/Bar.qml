@@ -18,6 +18,15 @@ RowLayout {
     required property BarPopouts.Wrapper popouts
     required property bool fullscreen
     readonly property int hPadding: Tokens.padding.large
+    readonly property real clockCenterX: {
+        const count = repeater.count;
+        for (let i = 0; i < count; i++) {
+            const loader = repeater.itemAt(i) as WrappedLoader;
+            if (loader?.id === "clock" && loader.enabled)
+                return loader.x + loader.width / 2;
+        }
+        return width / 2;
+    }
 
     function closeTray(): void {
         if (!Config.bar.tray.compact)
@@ -29,6 +38,10 @@ RowLayout {
                 (loader.item as Tray).expanded = false;
             }
         }
+    }
+
+    function entryAt(x: real): string {
+        return (childAt(x, height / 2) as WrappedLoader)?.id ?? "";
     }
 
     function checkPopout(x: real): void {

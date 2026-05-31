@@ -23,9 +23,14 @@ Item {
     readonly property int exclusiveZone: !disabled && (Config.bar.persistent || visibilities.bar) ? contentHeight : Config.border.thickness
     readonly property bool shouldBeVisible: !fullscreen && !disabled && (Config.bar.persistent || visibilities.bar || isHovered)
     property bool isHovered
+    readonly property real clockCenterX: (content.item as Bar)?.clockCenterX ?? (width / 2)
 
     function closeTray(): void {
         (content.item as Bar)?.closeTray();
+    }
+
+    function entryAt(x: real): string {
+        return (content.item as Bar)?.entryAt(x) ?? "";
     }
 
     function checkPopout(y: real): void {

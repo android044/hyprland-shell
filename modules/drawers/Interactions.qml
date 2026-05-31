@@ -203,8 +203,15 @@ CustomMouseArea {
                 visibilities.dashboard = false;
         }
 
-        // Show utilities on hover
-        const showUtilities = inBottomPanel(panels.utilities, x, y, true);
+        // Hovering the clock opens the utilities panel; hovering any other bar
+        // entry opens its popout instead. The two are mutually exclusive so the
+        // wifi/bluetooth/battery popouts never overlap the utilities panel.
+        const inBar = y > height - bar.implicitHeight;
+        const clockHovered = inBar && bar.entryAt(x) === "clock";
+
+        // Show utilities on hover (over the clock, or over the panel itself so it
+        // can be interacted with after sliding up from the clock)
+        const showUtilities = clockHovered || inBottomPanel(panels.utilities, x, y, true);
 
         // Always update visibility based on hover if not in shortcut mode
         if (!utilitiesShortcutActive) {
@@ -215,8 +222,12 @@ CustomMouseArea {
         }
 
         // Show popouts on hover
-        if (y > height - bar.implicitHeight) {
+        if (inBar && !clockHovered) {
             bar.checkPopout(x);
+        } else if (clockHovered) {
+            // Clock shows utilities instead, so close any open popout
+            popouts.hasCurrent = false;
+            bar.closeTray();
         } else if ((!popouts.currentName.startsWith("traymenu") || ((popouts.current as StackView)?.depth ?? 0) <= 1) && !inLeftPanel(panels.popoutsWrapper, x, y)) {
             popouts.hasCurrent = false;
             bar.closeTray();
@@ -274,8 +285,10 @@ CustomMouseArea {
 
         function onUtilitiesChanged() {
             if (root.visibilities.utilities) {
-                // Utilities became visible, immediately check if this should be shortcut mode
-                const inUtilitiesArea = root.inBottomPanel(root.panels.utilities, root.mouseX, root.mouseY);
+                // Utilities became visible, immediately check if this should be shortcut mode.
+                // Hovering the clock counts as hover control too, not a shortcut.
+                const overClock = root.mouseY > root.height - root.bar.implicitHeight && root.bar.entryAt(root.mouseX) === "clock";
+                const inUtilitiesArea = overClock || root.inBottomPanel(root.panels.utilities, root.mouseX, root.mouseY);
                 if (!inUtilitiesArea) {
                     root.utilitiesShortcutActive = true;
                 }

@@ -130,7 +130,13 @@ Item {
         popouts: popoutsWrapper.content
 
         anchors.bottom: parent.bottom
-        anchors.right: parent.right
+        x: Math.max(0, Math.min(bar.clockCenterX - utilities.implicitWidth / 2, parent.width - utilities.implicitWidth))
+
+        Behavior on x {
+            Anim {
+                type: Anim.DefaultSpatial
+            }
+        }
     }
 
     Toasts.Toasts {
