@@ -30,7 +30,7 @@ Item {
             return off + diff;
         return Math.max(off, 0);
     }
-    y: content.isDetached ? (parent.height - content.nonAnimHeight) / 2 : parent.height - content.nonAnimHeight - borderThickness
+    y: content.isDetached ? (parent.height - content.nonAnimHeight) / 2 : parent.height - implicitHeight
 
     Behavior on offsetScale {
         Anim {
