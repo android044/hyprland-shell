@@ -98,6 +98,8 @@ StyledClippingRect {
                 workspaces: workspaces
                 mask: layout
                 fullscreen: root.fullscreen
+                hasActiveWindow: Hypr.activeToplevel !== null
+                containerWidth: root.width
             }
         }
 

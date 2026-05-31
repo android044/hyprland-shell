@@ -13,6 +13,8 @@ StyledRect {
     required property Repeater workspaces
     required property Item mask
     required property bool fullscreen
+    required property bool hasActiveWindow
+    required property real containerWidth
 
     readonly property int currentWsIdx: {
         let i = activeWsId - 1;
@@ -24,12 +26,15 @@ StyledRect {
     property real leading: workspaces.count > 0 ? workspaces.itemAt(currentWsIdx)?.x ?? 0 : 0
     property real trailing: workspaces.count > 0 ? workspaces.itemAt(currentWsIdx)?.x ?? 0 : 0
     property real currentSize: workspaces.count > 0 ? Tokens.sizes.bar.innerWidth - Tokens.padding.small * 2 : 0
-    property real offset: Math.min(leading, trailing)
+    property real wsOffset: Math.min(leading, trailing)
+    property real offset: hasActiveWindow ? -mask.x : wsOffset
     property real size: {
+        if (root.hasActiveWindow)
+            return containerWidth;
         const s = Math.abs(leading - trailing) + currentSize;
         if (Config.bar.workspaces.activeTrail && lastWs > currentWsIdx) {
             const ws = workspaces.itemAt(lastWs) as Workspace;
-            return ws ? Math.min(ws.x + ws.size - offset, s) : 0;
+            return ws ? Math.min(ws.x + ws.size - wsOffset, s) : 0;
         }
         return s;
     }
